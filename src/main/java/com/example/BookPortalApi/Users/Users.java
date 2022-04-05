@@ -15,16 +15,26 @@ public class Users {
     private String email;
     private String address;
     private int due_amt;
+    private String password;
 
     public Users() {
     }
 
-    public Users(String name, String phone, String email, String address, int due_amt) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Users(String name, String phone, String email, String address, int due_amt, String password) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.due_amt = due_amt;
+        this.password = password;
     }
 
     public int getDue_amt() {
@@ -83,7 +93,8 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", phone=" + phone + '\'' +
                 ", address=" + address + '\'' +
-                ", due=" + due_amt +
+                ", due=" + due_amt + '\'' +
+                ", password=" + password +
                 '}';
     }
 }

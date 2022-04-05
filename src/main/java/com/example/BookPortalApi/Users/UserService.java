@@ -3,6 +3,8 @@ package com.example.BookPortalApi.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -19,5 +21,15 @@ public class UserService {
         if(this.userRepository.findAllByPhoneEquals(user.getPhone()).size()>0)
             throw new IllegalArgumentException("Duplicate phone");
         this.userRepository.save(user);
+    }
+
+    public boolean checkIfUserExists(Users user) {
+        Optional<Users> userExists =  this.userRepository.findByEmail(user.getEmail());
+        return userExists.isPresent();
+    }
+
+    public boolean isPasswordCorrect(Users user) {
+        Optional<Users> existingUser =  this.userRepository.findByEmail(user.getEmail());
+        return existingUser.get().getPassword().equals(user.getPassword());
     }
 }
