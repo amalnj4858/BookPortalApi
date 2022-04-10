@@ -16,6 +16,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    @ResponseBody
+    public Users returnUserDetails(@RequestParam String email){
+        return this.userService.returnUser(email);
+    }
+
     @PostMapping
     public void createUser(@RequestBody Users user){
         this.userService.addUser(user);

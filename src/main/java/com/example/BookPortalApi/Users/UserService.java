@@ -32,4 +32,9 @@ public class UserService {
         Optional<Users> existingUser =  this.userRepository.findByEmail(user.getEmail());
         return existingUser.get().getPassword().equals(user.getPassword());
     }
+
+    public Users returnUser(String email) {
+        Optional<Users> existingUser =  this.userRepository.findByEmail(email);
+        return existingUser.get();
+    }
 }
