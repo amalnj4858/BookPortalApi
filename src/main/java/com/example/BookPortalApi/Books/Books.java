@@ -11,6 +11,7 @@ public class Books {
     private int id;
     private String name;
     private String author;
+    private int lender_id;
     private String publisher;
     private String lender_name;
     private String lender_address;
@@ -19,7 +20,7 @@ public class Books {
     public Books() {
     }
 
-    public Books(int id, String name, String author, String publisher, String lender_name, String lender_address, String book_status) {
+    public Books(int id, String name, String author, String publisher, String lender_name, String lender_address, int lender_id, String book_status) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -27,15 +28,25 @@ public class Books {
         this.lender_name = lender_name;
         this.lender_address = lender_address;
         this.book_status = book_status;
+        this.lender_id = lender_id;
     }
 
-    public Books( String name, String author, String publisher, String lender_name, String lender_address, String book_status) {
+    public Books( String name, String author, String publisher, String lender_name, String lender_address, int lender_id, String book_status) {
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.lender_name = lender_name;
         this.lender_address = lender_address;
         this.book_status = book_status;
+        this.lender_id = lender_id;
+    }
+
+    public int getLender_id() {
+        return lender_id;
+    }
+
+    public void setLender_id(int lender_id) {
+        this.lender_id = lender_id;
     }
 
     public int getId() {
@@ -102,6 +113,7 @@ public class Books {
                 ", publisher=" + publisher + '\'' +
                 ", lender_name=" + lender_name + '\'' +
                 ", lender_address=" + lender_address + '\'' +
+                ", lender_id=" + lender_id + '\'' +
                 ", book_status =" + book_status +
                 '}';
     }

@@ -5,6 +5,8 @@ import com.example.BookPortalApi.Users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "books")
 @CrossOrigin("*")
@@ -19,5 +21,10 @@ public class BooksController {
     @PostMapping
     public void addBook(@RequestBody Books Book){
         this.bookService.addBook(Book);
+    }
+
+    @GetMapping
+    public List<Books> getBooks(){
+        return this.bookService.fetchBooks();
     }
 }
