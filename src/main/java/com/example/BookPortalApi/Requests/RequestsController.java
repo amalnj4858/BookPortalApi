@@ -16,14 +16,17 @@ public class RequestsController {
          this.requestsService = requestsService;
      }
 
-     @PostMapping
-    public String createRequest(@RequestBody Requests request){
-        String result = this.requestsService.addRequest(request);
-        return result;
-     }
     @GetMapping
     @ResponseBody
     public List<Requests> getRequests(@RequestParam int id){
         return this.requestsService.getRequestsToUser(id);
     }
+
+     @PostMapping
+    public String createRequest(@RequestBody Requests request){
+        String result = this.requestsService.addRequest(request);
+        return result;
+     }
+
+
 }
