@@ -6,6 +6,7 @@ import com.example.BookPortalApi.Books.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -33,5 +34,9 @@ public class RequestsService {
         }
         else
             return "Book does not exist in pool";
+    }
+
+    public List<Requests> getRequestsToUser(int id) {
+        return this.requestsRepository.findAllByLender_idEquals(id);
     }
 }

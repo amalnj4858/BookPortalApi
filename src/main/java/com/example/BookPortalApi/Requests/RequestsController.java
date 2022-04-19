@@ -3,6 +3,8 @@ package com.example.BookPortalApi.Requests;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "requests")
 @CrossOrigin("*")
@@ -16,8 +18,12 @@ public class RequestsController {
 
      @PostMapping
     public String createRequest(@RequestBody Requests request){
-        System.out.println(request);
         String result = this.requestsService.addRequest(request);
         return result;
      }
+    @GetMapping
+    @ResponseBody
+    public List<Requests> getRequests(@RequestParam int id){
+        return this.requestsService.getRequestsToUser(id);
+    }
 }

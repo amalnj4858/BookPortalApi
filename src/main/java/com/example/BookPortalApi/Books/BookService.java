@@ -15,12 +15,20 @@ public class BookService {
         this.booksRepository = booksRepository;
     }
 
-    public void addBook(Books book) {
+    public String addBook(Books book) {
+        Optional<Books> sameBook = this.booksRepository.findFirstByNameEqualsAndLender_nameEquals(book.getName(), book.getLender_name());
+        if(sameBook.isPresent())
+            return "Book Exists";
         this.booksRepository.save(book);
+        return "Success";
     }
 
     public List<Books> fetchBooks() {
         return this.booksRepository.findAll();
+    }
+
+    public Optional<Books> findBookByNameAndLender(String name, String lender_name){
+        return this.booksRepository.findFirstByNameEqualsAndLender_nameEquals(name,lender_name);
     }
 
     public Optional<Books> getBookById(int id){
