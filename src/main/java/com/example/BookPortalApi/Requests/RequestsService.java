@@ -21,8 +21,10 @@ public class RequestsService {
         this.bookService = bookService;
     }
     public String addRequest(Requests request) {
+        Optional<Requests> existingRequest = this.requestsRepository.findAllByBorrower_idEqualsAndBook_idEquals(request.getBorrower_id(),request.getBook_id());
+        if(existingRequest.isPresent())
+            return "Duplicate Request";
         Optional<Books> book_requested = this.bookService.getBookById(request.getBook_id());
-        System.out.println(request);
         if(book_requested.isPresent()){
             Books book = book_requested.get();
             if(book.getBook_status().toLowerCase(Locale.ROOT).equals("available")){

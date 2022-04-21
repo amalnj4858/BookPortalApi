@@ -30,6 +30,16 @@ public class BooksController {
         return this.bookService.fetchBooks();
     }
 
+    @GetMapping(path ="getbookbyid")
+    @ResponseBody
+    public Books getBookById(@RequestParam int bookid){
+        Optional<Books> book = this.bookService.getBookById(bookid);
+        if(book.isPresent())
+        return book.get();
+        else
+            return new Books();
+    }
+
     @GetMapping(path ="getbook")
     @ResponseBody
     public Books getBookInfo(@RequestParam String name, @RequestParam String lender_name){

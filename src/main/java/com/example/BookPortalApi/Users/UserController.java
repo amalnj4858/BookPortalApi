@@ -22,9 +22,16 @@ public class UserController {
         return this.userService.returnUser(email);
     }
 
+    @GetMapping(path = "findbyid")
+    @ResponseBody
+    public Users returnUserById(@RequestParam int id){
+        return this.userService.returnUserById(id);
+    }
+
     @PostMapping
-    public void createUser(@RequestBody Users user){
-        this.userService.addUser(user);
+    public String createUser(@RequestBody Users user){
+        String result = this.userService.addUser(user);
+        return result;
     }
 
     @PostMapping(path = "signin")

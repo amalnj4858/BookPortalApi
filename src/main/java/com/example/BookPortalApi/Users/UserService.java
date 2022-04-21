@@ -15,12 +15,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(Users user) {
+    public String addUser(Users user) {
         if(this.userRepository.findAllByEmailEquals(user.getEmail()).size()>0)
-            throw new IllegalArgumentException("Duplicate email");
+            return "Duplicate email";
         if(this.userRepository.findAllByPhoneEquals(user.getPhone()).size()>0)
-            throw new IllegalArgumentException("Duplicate phone");
+            return "Duplicate phone";
         this.userRepository.save(user);
+        Optional<Users> currentUser = this.userRepository.findByEmail(user.getEmail());
+        return Integer.toString(currentUser.get().getId());
     }
 
     public boolean checkIfUserExists(Users user) {
@@ -35,6 +37,11 @@ public class UserService {
 
     public Users returnUser(String email) {
         Optional<Users> existingUser =  this.userRepository.findByEmail(email);
+        return existingUser.get();
+    }
+
+    public Users returnUserById(int id) {
+        Optional<Users> existingUser =  this.userRepository.findById(id);
         return existingUser.get();
     }
 }
