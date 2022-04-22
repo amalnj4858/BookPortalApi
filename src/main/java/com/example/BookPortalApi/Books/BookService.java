@@ -34,4 +34,12 @@ public class BookService {
     public Optional<Books> getBookById(int id){
         return this.booksRepository.findById(id);
     }
+
+    public void makeBookUnAvailable(int id){
+        this.booksRepository.updateStatus(id,"Unavailable");
+    }
+
+    public void makeBookAvailable(int id){
+        this.booksRepository.updateStatus(id,"Available");
+    }
 }

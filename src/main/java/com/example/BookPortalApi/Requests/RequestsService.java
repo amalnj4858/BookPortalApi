@@ -41,4 +41,8 @@ public class RequestsService {
     public List<Requests> getRequestsToUser(int id) {
         return this.requestsRepository.findAllByLender_idEquals(id);
     }
+
+    public void updateRequestStatus(int id){
+        this.requestsRepository.updateRequestStatus(id,"Accepted");
+    }
 }
