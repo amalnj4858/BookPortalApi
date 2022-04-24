@@ -34,6 +34,8 @@ public class UserController {
         return result;
     }
 
+
+
     @PostMapping(path = "signin")
     public String authenticateUser(@RequestBody Users user){
         if(this.userService.checkIfUserExists(user)){

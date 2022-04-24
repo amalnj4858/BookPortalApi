@@ -2,6 +2,8 @@ package com.example.BookPortalApi.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Optional;
 
@@ -43,5 +45,11 @@ public class UserService {
     public Users returnUserById(int id) {
         Optional<Users> existingUser =  this.userRepository.findById(id);
         return existingUser.get();
+    }
+
+    @Transactional
+    public void updateUserDues(int userid, int dayslate) {
+        int dues = dayslate*10;
+        this.userRepository.updateDues(userid,dues);
     }
 }

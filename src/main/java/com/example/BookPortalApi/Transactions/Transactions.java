@@ -1,5 +1,7 @@
 package com.example.BookPortalApi.Transactions;
 
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -17,11 +19,12 @@ public class Transactions {
     private LocalDate issue_date;
     private LocalDate expected_return_date;
     private String book_status;
+    private LocalDate date_returned;
 
     public Transactions() {
     }
 
-    public Transactions(int id, int request_id, int book_id, int borrower_id, int lender_id, LocalDate issue_date, LocalDate expected_return_date,String book_status) {
+    public Transactions(int id, int request_id, int book_id, int borrower_id, int lender_id, LocalDate issue_date, LocalDate expected_return_date, LocalDate date_returned, String book_status) {
         this.id = id;
         this.request_id = request_id;
         this.book_id = book_id;
@@ -30,6 +33,7 @@ public class Transactions {
         this.issue_date = issue_date;
         this.expected_return_date = expected_return_date;
         this.book_status = book_status;
+        this.date_returned = date_returned;
     }
 
     public int getId() {
@@ -38,6 +42,14 @@ public class Transactions {
 
     public int getRequest_id() {
         return request_id;
+    }
+
+    public LocalDate getDate_returned() {
+        return date_returned;
+    }
+
+    public void setDate_returned(LocalDate date_returned) {
+        this.date_returned = date_returned;
     }
 
     public void setRequest_id(int request_id) {

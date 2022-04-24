@@ -1,18 +1,27 @@
 package com.example.BookPortalApi.Books;
 
+import com.example.BookPortalApi.Transactions.TransactionsService;
+import com.example.BookPortalApi.Users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BookService {
     private BooksRepository booksRepository;
+    private TransactionsService transactionsService;
+    private UserService userService;
 
     @Autowired
-    BookService(BooksRepository booksRepository){
+    BookService(BooksRepository booksRepository, @Lazy TransactionsService transactionsService, UserService userService){
         this.booksRepository = booksRepository;
+        this.transactionsService = transactionsService;
+        this.userService = userService;
     }
 
     public String addBook(Books book) {
@@ -39,7 +48,11 @@ public class BookService {
         this.booksRepository.updateStatus(id,"Unavailable");
     }
 
-    public void makeBookAvailable(int id){
-        this.booksRepository.updateStatus(id,"Available");
+    @Transactional
+    public void makeBookAvailable(int bookid, LocalDate returndate, int numberofdayslate, int userid, int transactionid){
+        this.booksRepository.updateStatus(bookid,"Available");
+        this.transactionsService.updateTransactionStatus(transactionid,returndate);
+        this.userService.updateUserDues(userid,numberofdayslate);
     }
+
 }
