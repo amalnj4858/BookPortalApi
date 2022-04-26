@@ -28,10 +28,22 @@ public class UserController {
         return this.userService.returnUserById(id);
     }
 
+    @GetMapping(path = "updatepassword")
+    @ResponseBody
+    public void returnUserById(@RequestParam int id, @RequestParam String password){
+        this.userService.updatePassword(id,password);
+    }
+
     @PostMapping
     public String createUser(@RequestBody Users user){
         String result = this.userService.addUser(user);
         return result;
+    }
+
+    @GetMapping(path = "payoff")
+    @ResponseBody
+    public String payOffDues(@RequestParam int id){
+        return this.userService.clearDues(id);
     }
 
 

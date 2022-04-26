@@ -52,4 +52,15 @@ public class UserService {
         int dues = dayslate*10;
         this.userRepository.updateDues(userid,dues);
     }
+
+    @Transactional
+    public String clearDues(int id) {
+        this.userRepository.updateDues(id,0);
+        return "Paid!";
+    }
+
+    @Transactional
+    public void updatePassword(int id, String password) {
+        this.userRepository.updatePassword(id,password);
+    }
 }
