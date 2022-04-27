@@ -21,4 +21,7 @@ public interface TransactionsRepository extends JpaRepository<Transactions,Integ
     @Modifying
     @Query("update Transactions transaction set transaction.expected_return_date = :extendedDate where transaction.id = :transactionid")
     void extendDate(@Param("transactionid") int transationid,@Param("extendedDate") LocalDate extendedDate);
+
+    @Query("SELECT transaction.borrower_id FROM Transactions transaction WHERE transaction.book_id = :bookid")
+    int findBorroweridOfBookid(@Param("bookid") int bookid);
 }

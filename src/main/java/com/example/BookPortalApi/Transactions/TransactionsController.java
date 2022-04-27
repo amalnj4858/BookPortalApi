@@ -26,4 +26,16 @@ public class TransactionsController {
     public List<Transactions> getTransactionsById(@RequestParam int id){
         return this.transactionsService.fetchTransactionsById(id);
     }
+
+    @GetMapping(path = "getBorrower")
+    @ResponseBody
+    public String getBorrowerByBookId(@RequestParam int bookid){
+        return this.transactionsService.getBorrowerByBookId(bookid);
+    }
+
+    @GetMapping(path = "getalltransactions")
+    @ResponseBody
+    public List<Transactions> getAllTransactions(){
+        return this.transactionsService.returnAllTransactions();
+    }
 }

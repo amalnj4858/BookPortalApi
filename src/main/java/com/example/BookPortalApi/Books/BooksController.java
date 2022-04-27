@@ -33,6 +33,19 @@ public class BooksController {
         return this.bookService.fetchBooks();
     }
 
+    @GetMapping(path = "getbookbylenderid")
+    @ResponseBody
+    public List<Books> getBookByLenderId(@RequestParam int lenderid) {
+        List<Books> books = this.bookService.getBookByLenderId(lenderid);
+        return books;
+    }
+
+    @GetMapping(path = "withdrawbook")
+    @ResponseBody
+    public void withdrawBook(@RequestParam int bookid) {
+       this.bookService.withdrawBook(bookid);
+    }
+
     @GetMapping(path = "getbookbyid")
     @ResponseBody
     public Books getBookById(@RequestParam int bookid) {

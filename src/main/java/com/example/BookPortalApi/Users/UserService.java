@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -62,5 +63,9 @@ public class UserService {
     @Transactional
     public void updatePassword(int id, String password) {
         this.userRepository.updatePassword(id,password);
+    }
+
+    public List<Users> returnAllUsers() {
+        return this.userRepository.findAll();
     }
 }

@@ -55,4 +55,12 @@ public class BookService {
         this.userService.updateUserDues(userid,numberofdayslate);
     }
 
+    public List<Books> getBookByLenderId(int lenderid) {
+        return this.booksRepository.findAllByLender_idEquals(lenderid);
+    }
+
+    @Transactional
+    public void withdrawBook(int bookid) {
+        this.booksRepository.deleteBookById(bookid);
+    }
 }

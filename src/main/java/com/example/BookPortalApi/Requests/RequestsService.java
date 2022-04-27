@@ -45,4 +45,8 @@ public class RequestsService {
     public void updateRequestStatus(int id){
         this.requestsRepository.updateRequestStatus(id,"Accepted");
     }
+
+    public List<Requests> fetchAllRequests() {
+        return this.requestsRepository.findAll();
+    }
 }

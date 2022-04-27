@@ -2,6 +2,9 @@ package com.example.BookPortalApi.Transactions;
 
 import com.example.BookPortalApi.Books.BookService;
 import com.example.BookPortalApi.Requests.RequestsService;
+import com.example.BookPortalApi.Users.UserRepository;
+import com.example.BookPortalApi.Users.UserService;
+import com.example.BookPortalApi.Users.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +18,14 @@ public class TransactionsService {
     private TransactionsRepository transactionsRepository;
     private BookService bookService;
     private RequestsService requestsService;
+    private UserService userService;
 
     @Autowired
-    TransactionsService(TransactionsRepository transactionsRepository,BookService bookService,RequestsService requestsService){
+    TransactionsService(TransactionsRepository transactionsRepository,BookService bookService,RequestsService requestsService,UserService userService){
         this.transactionsRepository = transactionsRepository;
         this.bookService = bookService;
         this.requestsService = requestsService;
+        this.userService = userService;
     }
 
     @Transactional
@@ -38,5 +43,15 @@ public class TransactionsService {
     @Transactional
     public void updateTransactionStatus(int transactionid, LocalDate returndate) {
         this.transactionsRepository.returnBook(transactionid,returndate,"Returned");
+    }
+
+    public String getBorrowerByBookId(int bookid) {
+        int borrower_id = this.transactionsRepository.findBorroweridOfBookid(bookid);
+        Users user = this.userService.returnUserById(borrower_id);
+        return user.getName();
+    }
+
+    public List<Transactions> returnAllTransactions() {
+        return this.transactionsRepository.findAll();
     }
 }

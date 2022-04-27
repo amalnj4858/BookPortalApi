@@ -4,6 +4,8 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "users")
@@ -32,6 +34,12 @@ public class UserController {
     @ResponseBody
     public void returnUserById(@RequestParam int id, @RequestParam String password){
         this.userService.updatePassword(id,password);
+    }
+
+    @GetMapping(path = "getallusers")
+    @ResponseBody
+    public List<Users> returnUsers(){
+        return this.userService.returnAllUsers();
     }
 
     @PostMapping

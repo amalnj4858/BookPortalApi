@@ -22,6 +22,12 @@ public class RequestsController {
         return this.requestsService.getRequestsToUser(id);
     }
 
+    @GetMapping(path = "getAllRequests")
+    @ResponseBody
+    public List<Requests> getAllRequests(){
+        return this.requestsService.fetchAllRequests();
+    }
+
      @PostMapping
     public String createRequest(@RequestBody Requests request){
         String result = this.requestsService.addRequest(request);
