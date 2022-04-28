@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TransactionsRepository extends JpaRepository<Transactions,Integer> {
@@ -24,4 +25,7 @@ public interface TransactionsRepository extends JpaRepository<Transactions,Integ
 
     @Query("SELECT transaction.borrower_id FROM Transactions transaction WHERE transaction.book_id = :bookid")
     int findBorroweridOfBookid(@Param("bookid") int bookid);
+
+    @Query("SELECT transaction FROM Transactions transaction WHERE transaction.book_id = :bookid")
+    Optional<Transactions> findByBook_idEquals(@Param("bookid") int bookid);
 }

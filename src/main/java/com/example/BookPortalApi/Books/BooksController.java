@@ -42,8 +42,8 @@ public class BooksController {
 
     @GetMapping(path = "withdrawbook")
     @ResponseBody
-    public void withdrawBook(@RequestParam int bookid) {
-       this.bookService.withdrawBook(bookid);
+    public String withdrawBook(@RequestParam int bookid) {
+       return this.bookService.withdrawBook(bookid);
     }
 
     @GetMapping(path = "getbookbyid")

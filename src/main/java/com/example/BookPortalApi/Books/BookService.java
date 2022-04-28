@@ -60,7 +60,11 @@ public class BookService {
     }
 
     @Transactional
-    public void withdrawBook(int bookid) {
+    public String withdrawBook(int bookid) {
+        if(this.transactionsService.getTransactionOnBook(bookid)){
+            return "The book has already been borrowed. Withdrawal can be done only after it is returned.";
+        }
         this.booksRepository.deleteBookById(bookid);
+        return "Success";
     }
 }

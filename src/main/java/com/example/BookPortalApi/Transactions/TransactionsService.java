@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.transaction.Transaction;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TransactionsService {
@@ -49,6 +50,14 @@ public class TransactionsService {
         int borrower_id = this.transactionsRepository.findBorroweridOfBookid(bookid);
         Users user = this.userService.returnUserById(borrower_id);
         return user.getName();
+    }
+
+    public boolean getTransactionOnBook(int bookid){
+        Optional<Transactions> transaction = this.transactionsRepository.findByBook_idEquals(bookid);
+        if(transaction.isPresent())
+            return true;
+        else
+            return false;
     }
 
     public List<Transactions> returnAllTransactions() {

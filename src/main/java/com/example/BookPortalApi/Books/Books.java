@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Books {
+public class  Books {
     @Id
     @SequenceGenerator(name = "bookseq", sequenceName = "booksequence", allocationSize = 1)
     @GeneratedValue(generator = "bookseq")
@@ -104,6 +104,7 @@ public class Books {
     public void setBook_status(String book_status) {
         this.book_status = book_status;
     }
+
     @Override
     public String toString() {
         return "User{" +
